@@ -1,5 +1,6 @@
 dir = getDirectory("Choose a Directory");
 list = getFileList(dir);
+ts= false //troubleshoot mode
 for (c = 0; c < list.length; c++) {
 	path = dir + list[c];
 	   if (!File.isFile(path)) {
@@ -24,12 +25,24 @@ for (c = 0; c < list.length; c++) {
 	run("8-bit");
 	open(dir+"/Cell_Masks/"+name+"_cell.tif");
 	rename("Cell");
+	setOption("BlackBackground", true);
+	setThreshold(255, 255);
+	run("Convert to Mask");
 	open(dir+"/Mito_Masks/"+name+"_mito.tif");
 	rename("Mito");
+	setOption("BlackBackground", true);
+	setThreshold(255, 255);
+	run("Convert to Mask");
 	open(dir+"/Myo_Masks/"+name+"_myo.tif");
 	rename("Myo");
+	setOption("BlackBackground", true);
+	setThreshold(255, 255);
+	run("Convert to Mask");
 	open(dir+"/Nucleus_Masks/"+name+"_nucleus.tif");
 	rename("Nucleus");
+	setOption("BlackBackground", true);
+	setThreshold(255, 255);
+	run("Convert to Mask");
 // start analysis nucleus
 selectWindow("Nucleus");
 run("Analyze Particles...", "display add");
@@ -139,7 +152,9 @@ WNT=(WNT+WN);
 }
 LNT= ((LNT/(n))*pixelWidth);
 WNT= ((WNT/(n))*pixelWidth);
-//print(LNT, WNT ,Area ,Circ ,AR ,Round ,Solidity);
+if (ts==true) {
+print(LNT, WNT ,Area ,Circ ,AR ,Round ,Solidity);
+}
 // Nuclear positioning 
 CW=newArray();
 for (w = 0; w < n; w++) {
@@ -214,7 +229,9 @@ CW[w]= (WDmin*pixelWidth);
 wait(500);
 }
 Array.getStatistics(CW, CWmin, CWmax, CWmean, CWstdDev);
-//print(CWmin);
+if (ts==true) {
+print(CWmin);
+}
 //segmenting mitochondria and mitochondria analysis 
 roiManager("reset");
 run("Clear Results");
@@ -321,13 +338,15 @@ for (i = 0; i < 90; i++) {
 LMT[z]=(LM*pixelWidth);
 WMT[z]=(WM*pixelWidth);
 }
-//Array.print(LMT);
-//Array.print(WMT);
-//Array.print(mA);
-//Array.print(mC);
-//Array.print(mAR);
-//Array.print(mRO);
-//Array.print(mSO);
+if (ts==true) {
+Array.print(LMT);
+Array.print(WMT);
+Array.print(mA);
+Array.print(mC);
+Array.print(mAR);
+Array.print(mRO);
+Array.print(mSO);
+}
 // sort mito into categories
 roiManager("reset");
 C=newArray();
@@ -397,12 +416,14 @@ for (z = 0; z < n; z++) {
 		}
 	}
 }
-//Array.print(C);
-//Array.print(I);
-//Array.print(F);
-//Array.print(CI);
-//Array.print(II);
-//Array.print(FI);
+if (ts==true) {
+Array.print(C);
+Array.print(I);
+Array.print(F);
+Array.print(CI);
+Array.print(II);
+Array.print(FI);
+}
 //sort mito output
 function extractValues(srcArray, idxArray) {
     result = newArray(idxArray.length);
@@ -475,7 +496,9 @@ lines = split(getInfo(), "\n");
 tMiA = split(lines[1], "\t"); 
 tCA = split(lines[2], "\t"); 
 tMyA = split(lines[3], "\t"); 
-//print(tMiA[2],tCA[2],tMyA[2]);
+if (ts==true) {
+print(tMiA[2],tCA[2],tMyA[2]);
+}
 selectWindow("Summary"); 
 run("Close");
 // calculate mitochondrial nuclear contact coverage
@@ -592,6 +615,8 @@ roiManager("Set Color", "green");
 roiManager("Set Line Width", 10);
 roiManager("show all");
 run("Flatten");
+selectImage(name+"-3.tif");
+saveAs("Tiff", dir+"/Results/Result_of_"+tit);
 // cleanup
 selectImage("Mito");
 close;
@@ -615,4 +640,9 @@ selectImage(name+"-1.tif");
 close;
 selectImage(name+"-2.tif");
 close;
+selectImage("Result_of_"+tit);
+close;
 }
+selectWindow("Log");
+saveAs("Text", dir+"/Results/Result.txt");
+run("Close", "Log");
