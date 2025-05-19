@@ -428,57 +428,99 @@ Array.print(FI);
 function extractValues(srcArray, idxArray) {
     result = newArray(idxArray.length);
     for (i = 0; i < idxArray.length; i++) {
-        result[i] = srcArray[idxArray[i]];
+        result[i+1] = srcArray[idxArray[i]];
     }
     return result;
 }
 CLMT = extractValues(LMT, C);
+CLMT[0]= "Length";
 CWMT = extractValues(WMT, C);
+CWMT[0] = "Width";
 CmA  = extractValues(mA,  C);
+CmA[0] = "Area";
 CmC  = extractValues(mC,  C);
+CmC[0] = "circularity";
 CmAR = extractValues(mAR, C);
+CmAR[0] = "Aspect Ratio";
 CmRO = extractValues(mRO, C);
+CmRO[0] = "Roundness";
 CmSO = extractValues(mSO, C);
+CmSO[0]= "Solidity";
 
 CILMT = extractValues(LMT, CI);
+CILMT[0]= "Length";
 CIWMT = extractValues(WMT, CI);
+CIWMT[0]= "Width";
 CImA  = extractValues(mA,  CI);
+CImA[0]= "Area";
 CImC  = extractValues(mC,  CI);
+CImC[0]= "circularity";
 CImAR = extractValues(mAR, CI);
+CImAR[0]= "Aspect Ratio";
 CImRO = extractValues(mRO, CI);
+CImRO[0]= "Roundness";
 CImSO = extractValues(mSO, CI);
+CImSO[0]= "Solidity";
 
 ILMT = extractValues(LMT, I);
+ILMT[0]="Length";
 IWMT = extractValues(WMT, I);
+IWMT[0]= "Width";
 ImA  = extractValues(mA,  I);
+ImA[0]= "Area";
 ImC  = extractValues(mC,  I);
+ImC[0]= "circularity";
 ImAR = extractValues(mAR, I);
+ImAR[0]= "Aspect Ratio";
 ImRO = extractValues(mRO, I);
+ImRO[0]= "Roundness";
 ImSO = extractValues(mSO, I);
+ImSO[0]= "Solidity";
 
 IILMT = extractValues(LMT, II);
+IILMT[0]="Length";
 IIWMT = extractValues(WMT, II);
+IIWMT[0]= "Width";
 IImA  = extractValues(mA,  II);
+IImA[0]= "Area";
 IImC  = extractValues(mC,  II);
+IImC[0]= "circularity";
 IImAR = extractValues(mAR, II);
+IImAR[0]= "Aspect Ratio";
 IImRO = extractValues(mRO, II);
+IImRO[0]= "Roundness";
 IImSO = extractValues(mSO, II);
+IImSO[0]= "Solidity";
 
 FLMT = extractValues(LMT, F);
+FLMT[0]="Length";
 FWMT = extractValues(WMT, F);
+FWMT[0]= "Width";
 FmA  = extractValues(mA,  F);
+FmA[0]= "Area";
 FmC  = extractValues(mC,  F);
+FmC[0]= "circularity";
 FmAR = extractValues(mAR, F);
+FmAR[0]= "Aspect Ratio";
 FmRO = extractValues(mRO, F);
+FmRO[0]= "Roundness";
 FmSO = extractValues(mSO, F);
+FmSO[0]= "Solidity";
 
 FILMT = extractValues(LMT, FI);
+FILMT[0]="Length";
 FIWMT = extractValues(WMT, FI);
+FIWMT[0]= "Width";
 FImA  = extractValues(mA,  FI);
+FImA[0]= "Area";
 FImC  = extractValues(mC,  FI);
+FImC[0]= "circularity";
 FImAR = extractValues(mAR, FI);
+FImAR[0]= "Aspect Ratio";
 FImRO = extractValues(mRO, FI);
+FImRO[0]= "Roundness";
 FImSO = extractValues(mSO, FI);
+FImSO[0]= "Solidity";
 
 //grab last overfiew infos
 run("Clear Results");
